@@ -54,10 +54,7 @@ func (t Trump) GetRankNumber() int {
 		return 8
 	case Nine:
 		return 9
-	case Ten:
-	case Jack:
-	case Queen:
-	case King:
+	case Ten, Jack, Queen, King:
 		return 10
 	case Ace:
 		return 11
