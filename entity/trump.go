@@ -36,6 +36,35 @@ type Trump struct {
 	Rank Rank
 }
 
+func (t Trump) GetRankNumber() int {
+	switch t.Rank {
+	case Two:
+		return 2
+	case Three:
+		return 3
+	case Four:
+		return 4
+	case Five:
+		return 5
+	case Six:
+		return 6
+	case Seven:
+		return 7
+	case Eight:
+		return 8
+	case Nine:
+		return 9
+	case Ten:
+	case Jack:
+	case Queen:
+	case King:
+		return 10
+	case Ace:
+		return 11
+	}
+	return 0
+}
+
 type Deck []Trump
 
 func NewDeck() Deck {
