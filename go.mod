@@ -1,6 +1,6 @@
 module github.com/litencatt/rlp
 
-go 1.22.1
+go 1.22
 
 require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
