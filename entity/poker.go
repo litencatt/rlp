@@ -21,6 +21,10 @@ const (
 
 // isFlush checks if all cards in the hand have the same suit.
 func isFlush(hand []Trump) bool {
+	if len(hand) < 5 {
+		return false
+	}
+
 	firstSuit := hand[0].Suit
 	for _, card := range hand[1:] {
 		if card.Suit != firstSuit {
@@ -32,6 +36,10 @@ func isFlush(hand []Trump) bool {
 
 // isStraight checks if the hand forms a sequential ranking.
 func isStraight(hand []Trump) bool {
+	if len(hand) < 5 {
+		return false
+	}
+
 	// Sort the hand by rank (implement the sorting logic based on your Rank definition)
 	sort.Slice(hand, func(i, j int) bool {
 		// Implement the comparison logic for your Rank type
