@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/litencatt/rlp/entity"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +23,13 @@ var runCmd = &cobra.Command{
 }
 
 func run() error {
-	fmt.Println("run called")
+	fmt.Println("start")
+
+	deck := entity.NewDeck()
+	deck.Shuffle()
+	hand := deck.Deal(8)
+	fmt.Println(hand)
+
 	return nil
 }
 
