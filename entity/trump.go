@@ -36,6 +36,10 @@ type Trump struct {
 	Rank Rank
 }
 
+func (t Trump) String() string {
+	return string(t.Rank) + " of " + string(t.Suit)
+}
+
 func (t Trump) GetRankNumber() int {
 	switch t.Rank {
 	case Two:
