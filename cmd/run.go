@@ -5,9 +5,10 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
+	"github.com/AlecAivazis/survey/v2"
 	"github.com/litencatt/rlp/entity"
-	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 )
 
@@ -25,38 +26,59 @@ var runCmd = &cobra.Command{
 
 func run() error {
 	fmt.Println("[Game start]")
-
 	deck := entity.NewDeck()
-	//deck.Shuffle()
+	deck.Shuffle()
 
 	// loop
 	for {
-		fmt.Println("\n[Deal 5 cards]")
-		hand := deck.Deal(5)
-		for _, card := range hand {
-			fmt.Printf("%s of %s\n", card.Rank, card.Suit)
-		}
+		fmt.Println("\n[Deal 8 cards]")
+		hand := deck.Deal(8)
 
-		// Selct play or discard
-		poker := entity.EvaluateHand(hand)
-		fmt.Printf("\nHand: %s\n\n", poker)
+		var selectCards []string
+		var cards []string
+		for _, card := range hand {
+			cards = append(cards, card.String())
+		}
+		promptMs := &survey.MultiSelect{
+			Message: "Select cards to play",
+			Options: cards,
+		}
+		survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
+
+		var playOrDsicard string
+		prompt := &survey.Select{
+			Message: "Play or Discard:",
+			Options: []string{"Play", "Discard"},
+		}
+		survey.AskOne(prompt, &playOrDsicard)
+
+		if playOrDsicard == "Play" {
+			// Selct play or discard
+			var playHand []entity.Trump
+			for _, card := range selectCards {
+				// extract rank and suit from card string
+				rank := strings.Split(card, " of ")[0]
+				suit := strings.Split(card, " of ")[1]
+				trump := entity.Trump{Rank: entity.Rank(rank), Suit: entity.Suit(suit)}
+				playHand = append(playHand, trump)
+			}
+
+			poker := entity.EvaluateHand(playHand)
+			fmt.Printf("\nHand: %s\n\n", poker)
+		} else {
+			// Select cards to discard
+		}
 
 		// play again?
-		validate := func(input string) error {
-			if input != "y" && input != "n" {
-				return fmt.Errorf("invalid input(%s)", input)
-			}
-			return nil
+		var playAgain string
+		promptAgain := &survey.Select{
+			Message: "Play again:",
+			Options: []string{"Play", "Quit"},
 		}
-		p := promptui.Prompt{
-			Label:    "Play again?",
-			Validate: validate,
-		}
-		result, err := p.Run()
-		if err != nil {
-			return err
-		}
-		if result != "y" {
+		survey.AskOne(promptAgain, &playAgain)
+		if playAgain == "Play" {
+
+		} else {
 			break
 		}
 	}
