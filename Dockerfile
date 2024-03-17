@@ -2,4 +2,3 @@
 FROM golang:1.22-bullseye
 
 WORKDIR /app
- 
