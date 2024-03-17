@@ -79,6 +79,10 @@ func NewDeck() Deck {
 	return deck
 }
 
+func (d Deck) Len() int {
+	return len(d)
+}
+
 func (d Deck) Shuffle() {
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(d), func(i, j int) {
