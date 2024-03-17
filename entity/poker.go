@@ -66,10 +66,10 @@ func groupByRank(hand []Trump) map[Rank]int {
 
 // EvaluateHand evaluates the given hand and returns the HandType.
 func EvaluateHand(hand []Trump) HandType {
-	isF := isFlush(hand)
-	isS := isStraight(hand)
+	isFlush := isFlush(hand)
+	isStraight := isStraight(hand)
 
-	if isF && isS {
+	if isFlush && isStraight {
 		// Check for Royal Flush
 		if hand[0].Rank == Ten {
 			return RoyalFlush
@@ -94,9 +94,9 @@ func EvaluateHand(hand []Trump) HandType {
 		return FourOfAKind
 	} else if threes == 1 && pairs == 1 {
 		return FullHouse
-	} else if isF {
+	} else if isFlush {
 		return Flush
-	} else if isS {
+	} else if isStraight {
 		return Straight
 	} else if threes == 1 {
 		return ThreeOfAKind
