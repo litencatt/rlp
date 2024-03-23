@@ -114,8 +114,9 @@ func run() error {
 			os.Exit(0)
 		}
 		if playOrDsicard == "Play" {
-			poker := entity.EvaluateHand(selectTrumps)
-			fmt.Printf("\nHand: %s\n\n", poker)
+			pokerHand := entity.EvaluateHand(selectTrumps)
+			score := entity.GetHandScore(pokerHand)
+			fmt.Printf("\nHand: %s, Score: %d\n\n", pokerHand, score)
 		}
 
 		fmt.Print("Remain cards:\n")

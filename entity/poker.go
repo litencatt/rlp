@@ -116,3 +116,29 @@ func EvaluateHand(hand []Trump) HandType {
 
 	return HighCard
 }
+
+func GetHandScore(hand HandType) int {
+	switch hand {
+	case HighCard:
+		return 1
+	case OnePair:
+		return 2
+	case TwoPair:
+		return 3
+	case ThreeOfAKind:
+		return 4
+	case Straight:
+		return 5
+	case Flush:
+		return 6
+	case FullHouse:
+		return 7
+	case FourOfAKind:
+		return 8
+	case StraightFlush:
+		return 9
+	case RoyalFlush:
+		return 10
+	}
+	return 0
+}
