@@ -98,19 +98,3 @@ func (p *PokerRound) PlayHand() (entity.HandType, int) {
 
 	return handType, score
 }
-
-func (p *PokerRound) GetTotalScore() int {
-	return p.TotalScore
-}
-
-func (p *PokerRound) GetHands() int {
-	return p.Hands
-}
-
-func (p *PokerRound) GetDiscards() int {
-	return p.DisCards
-}
-
-func (p *PokerRound) GetScoreAtLeast() int {
-	return p.ScoreAtLeast
-}
