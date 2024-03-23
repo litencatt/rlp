@@ -5,9 +5,11 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/litencatt/rlp/entity"
 	"github.com/spf13/cobra"
 )
@@ -67,7 +69,11 @@ func run() error {
 				Message: "Select cards",
 				Options: cards,
 			}
-			survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
+			err := survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
+			if err == terminal.InterruptErr {
+				fmt.Println("interrupted")
+				os.Exit(0)
+			}
 			selectCardNum = len(selectCards)
 			if selectCardNum <= 5 {
 				break
@@ -102,7 +108,11 @@ func run() error {
 			Message: "Play or Discard:",
 			Options: []string{"Play", "Discard"},
 		}
-		survey.AskOne(prompt, &playOrDsicard)
+
+		if err := survey.AskOne(prompt, &playOrDsicard); err == terminal.InterruptErr {
+			fmt.Println("interrupted")
+			os.Exit(0)
+		}
 		if playOrDsicard == "Play" {
 			poker := entity.EvaluateHand(selectTrumps)
 			fmt.Printf("\nHand: %s\n\n", poker)
@@ -119,7 +129,10 @@ func run() error {
 			Message: "Play again:",
 			Options: []string{"Play", "Quit"},
 		}
-		survey.AskOne(promptAgain, &playAgain)
+		if err := survey.AskOne(promptAgain, &playAgain); err == terminal.InterruptErr {
+			fmt.Println("interrupted")
+			os.Exit(0)
+		}
 		if playAgain == "Play" {
 			continue
 		} else {
