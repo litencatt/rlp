@@ -14,11 +14,14 @@ RLP_BINARY ?= ./rlp
 
 deps:
 	go install github.com/spf13/cobra-cli@latest
+	go install github.com/Songmu/ghch/cmd/ghch@latest
+	go install github.com/Songmu/gocredits/cmd/gocredits@latest
 
 build:
 	go build -ldflags="$(BUILD_LDFLAGS)" -o $(RLP_BINARY) cmd/rlp/main.go
 
 prerelease:
+	@$(MAKE) deps
 	go mod tidy
 	ghch -w -A --format=markdown -N $(NEXT_VER)
 	gocredits -skip-missing -w .
