@@ -59,12 +59,19 @@ func run() error {
 		for _, card := range hand {
 			cards = append(cards, card.String())
 		}
-		promptMs := &survey.MultiSelect{
-			Message: "Select cards",
-			Options: cards,
+		for {
+			selectCards = nil
+			promptMs := &survey.MultiSelect{
+				Message: "Select cards",
+				Options: cards,
+			}
+			survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
+			selectCardNum = len(selectCards)
+			if selectCardNum <= 5 {
+				break
+			}
+			fmt.Println("Please select less than 5 cards\n")
 		}
-		survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
-		selectCardNum = len(selectCards)
 
 		// Convert to Trump entity
 		var selectTrumps []entity.Trump
