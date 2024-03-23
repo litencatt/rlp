@@ -20,6 +20,10 @@ func NewRogurLikePoker() *RogurLikePoker {
 }
 
 func (r *RogurLikePoker) Run() error {
+	fmt.Println("Welcome to Rogue-like Poker!")
+	fmt.Println("Round start")
+	fmt.Println()
+
 	round := NewRound()
 
 	var selectCardNum int
