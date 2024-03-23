@@ -29,8 +29,10 @@ func (r *RogurLikePoker) Run() error {
 			nextDrawNum = selectCardNum
 		}
 
-		fmt.Println("[Draw", nextDrawNum, "cards]")
-		fmt.Println()
+		if r.DebugMode {
+			fmt.Println("[Draw", nextDrawNum, "cards]")
+			fmt.Println()
+		}
 
 		round.DrawCard(nextDrawNum)
 		handCards := round.HandCardString()
