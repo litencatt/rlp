@@ -43,7 +43,7 @@ func (r *RogurLikePoker) Run() error {
 		handCards := round.HandCardString()
 
 		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)
-		fmt.Printf("Round score: %d\n", round.GetTotalScore())
+		fmt.Printf("Round score: %d\n", round.TotalScore)
 		fmt.Printf("Hands: %d, DisCards: %d\n", round.Hands, round.DisCards)
 		fmt.Println()
 
@@ -112,11 +112,11 @@ func (r *RogurLikePoker) Run() error {
 		}
 
 		if round.TotalScore >= round.ScoreAtLeast {
-			fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.GetTotalScore())
+			fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.TotalScore)
 			fmt.Println("You win!")
 			break
 		} else if round.Hands <= 0 {
-			fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.GetTotalScore())
+			fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.TotalScore)
 			fmt.Println("You lose!")
 			break
 		} else {
