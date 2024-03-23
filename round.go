@@ -107,7 +107,7 @@ func (p *PokerRound) GetHands() int {
 	return p.Hands
 }
 
-func (p *PokerRound) GetDisCards() int {
+func (p *PokerRound) GetDiscards() int {
 	return p.DisCards
 }
 
