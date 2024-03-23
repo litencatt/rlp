@@ -37,6 +37,7 @@ func run() error {
 	selectCardNum := 0
 	nextDrawNum := defaultDeal
 	var remainCards []entity.Trump
+	totalScore := 0
 
 	// loop
 	for {
@@ -114,19 +115,22 @@ func run() error {
 			os.Exit(0)
 		}
 		if playOrDsicard == "Play" {
-			poker := entity.EvaluateHand(selectTrumps)
-			fmt.Printf("\nHand: %s\n\n", poker)
+			pokerHand := entity.EvaluateHand(selectTrumps)
+			score := entity.GetHandScore(pokerHand)
+			totalScore += score
+			fmt.Printf("\nHand: %s, Score: %d\n\n", pokerHand, score)
 		}
 
 		fmt.Print("Remain cards:\n")
 		for _, card := range remainCards {
 			fmt.Println(card)
 		}
+		fmt.Println()
 
 		// play again?
 		var playAgain string
 		promptAgain := &survey.Select{
-			Message: "Play again:",
+			Message: "Play again? (Total score: " + fmt.Sprintf("%d)", totalScore),
 			Options: []string{"Play", "Quit"},
 		}
 		if err := survey.AskOne(promptAgain, &playAgain); err == terminal.InterruptErr {
