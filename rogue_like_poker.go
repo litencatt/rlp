@@ -95,21 +95,18 @@ func (r *RogurLikePoker) Run() error {
 			continue
 		}
 
-		// play again?
-		var playAgain string
-		promptAgain := &survey.Select{
-			Message: "Play again? (Total score: " + fmt.Sprintf("%d)", round.GetTotalScore()),
-			Options: []string{"Play", "Quit"},
-		}
-		if err := survey.AskOne(promptAgain, &playAgain); err == terminal.InterruptErr {
-			fmt.Println("interrupted")
-			os.Exit(0)
-		}
-
-		if playAgain == "Play" {
-			continue
-		} else {
+		if round.TotalScore >= round.ScoreAtLeast {
+			fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.GetTotalScore())
+			fmt.Println("You win!")
 			break
+		} else if round.Hands <= 0 {
+			fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.GetTotalScore())
+			fmt.Println("You lose!")
+			break
+		} else {
+			if round.Hands > 0 && round.TotalScore < round.ScoreAtLeast {
+				continue
+			}
 		}
 	}
 
