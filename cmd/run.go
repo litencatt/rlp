@@ -29,11 +29,13 @@ func run() error {
 	deck := entity.NewDeck()
 	deck.Shuffle()
 
+	defaultDeal := 8
 	// loop
 	for {
-		fmt.Println("\n[Deal 8 cards]")
-		hand := deck.Deal(8)
+		fmt.Println("\n[Deal cards]")
+		hand := deck.Deal(defaultDeal)
 
+		// Convert to string
 		var selectCards []string
 		var cards []string
 		for _, card := range hand {
