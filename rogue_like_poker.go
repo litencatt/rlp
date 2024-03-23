@@ -86,8 +86,6 @@ func (r *RogurLikePoker) Run() error {
 			os.Exit(0)
 		}
 		if playOrDsicard == "Play" {
-			time.Sleep(1 * time.Second)
-
 			round.Hands--
 			handType, score := round.PlayHand()
 			fmt.Printf("\nHand: %s, Score: %d\n\n", handType, score)
