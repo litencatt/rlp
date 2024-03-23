@@ -3,6 +3,7 @@ package rlp
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
@@ -44,6 +45,9 @@ func (r *RogurLikePoker) Run() error {
 		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)
 		fmt.Printf("Round score: %d\n", round.GetTotalScore())
 		fmt.Printf("Hands: %d, DisCards: %d\n", round.Hands, round.DisCards)
+		fmt.Println()
+
+		time.Sleep(1 * time.Second)
 
 		var selectCards []string
 		// Select cards
@@ -82,9 +86,13 @@ func (r *RogurLikePoker) Run() error {
 			os.Exit(0)
 		}
 		if playOrDsicard == "Play" {
+			time.Sleep(1 * time.Second)
+
 			round.Hands--
 			handType, score := round.PlayHand()
 			fmt.Printf("\nHand: %s, Score: %d\n\n", handType, score)
+
+			time.Sleep(1 * time.Second)
 		} else {
 			round.DisCards--
 		}
