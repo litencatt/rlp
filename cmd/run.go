@@ -92,7 +92,7 @@ func run() error {
 		}
 		survey.AskOne(promptAgain, &playAgain)
 		if playAgain == "Play" {
-
+			continue
 		} else {
 			break
 		}
