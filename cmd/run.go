@@ -49,12 +49,23 @@ func run() error {
 
 		// Convert to Trump entity
 		var selectTrumps []entity.Trump
+		var remainTrumps []entity.Trump
 		for _, card := range selectCards {
 			// extract rank and suit from card string
 			rank := strings.Split(card, " of ")[0]
 			suit := strings.Split(card, " of ")[1]
-			trump := entity.Trump{Rank: entity.Rank(rank), Suit: entity.Suit(suit)}
-			selectTrumps = append(selectTrumps, trump)
+			// Find the card from hand
+			for _, c := range hand {
+				if string(c.Rank) == rank && string(c.Suit) == suit {
+					selectTrumps = append(selectTrumps, c)
+					break
+				}
+			}
+		}
+		for _, card := range hand {
+			if !entity.Contains(selectTrumps, card) {
+				remainTrumps = append(remainTrumps, card)
+			}
 		}
 
 		var playOrDsicard string
@@ -66,8 +77,11 @@ func run() error {
 		if playOrDsicard == "Play" {
 			poker := entity.EvaluateHand(selectTrumps)
 			fmt.Printf("\nHand: %s\n\n", poker)
-		} else {
-			// Select cards to discard
+		}
+
+		fmt.Print("Remain cards:\n")
+		for _, card := range remainTrumps {
+			fmt.Println(card)
 		}
 
 		// play again?
