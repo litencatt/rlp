@@ -9,6 +9,10 @@ import (
 	"github.com/AlecAivazis/survey/v2/terminal"
 )
 
+const Name string = "rlp"
+
+var Version = "dev"
+
 type RogurLikePoker struct {
 	DefaultDeal int
 	DebugMode   bool

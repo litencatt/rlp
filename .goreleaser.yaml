@@ -1,0 +1,47 @@
+before:
+  hooks:
+    - go mod download
+    - go mod tidy
+builds:
+  - id: rlp-darwin
+    ldflags:
+      - -s -w -X github.com/litencatt/rlp.Version={{.Version}} -X github.com/litencatt/rlp.commit={{.FullCommit}} -X github.com/litencatt/rlp.date={{.Date}} -X github.com/litencatt/rlp/version.Version={{.Version}}
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    main: ./cmd/rlp/main.go
+archives:
+  - id: rlp-archive
+    name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    format_overrides:
+      - goos: darwin
+        format: zip
+    files:
+      - CREDITS
+      - README.md
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Version }}-next"
+changelog:
+  skip: true
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+brews:
+  - name: rlp
+    tap:
+      owner: litencatt
+      name: homebrew-tap
+    commit_author:
+      name: litencatt
+      email: litencatt@gmail.com
+    homepage: https://github.com/litencatt/rlp
+    description: rlp is Rogure-Like Poker CLI game.
+    license: MIT
