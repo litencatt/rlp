@@ -14,7 +14,7 @@ type PokerRound struct {
 	RemainCards   []entity.Trump
 	SelectedCards []entity.Trump
 	Hands         int
-	DisCards      int
+	Discards      int
 	ScoreAtLeast  int
 }
 
@@ -25,7 +25,7 @@ func NewRound() *PokerRound {
 	return &PokerRound{
 		Deck:         deck,
 		Hands:        4,
-		DisCards:     3,
+		Discards:     3,
 		ScoreAtLeast: 10,
 	}
 }

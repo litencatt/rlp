@@ -44,7 +44,7 @@ func (r *RogurLikePoker) Run() error {
 
 		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)
 		fmt.Printf("Round score: %d\n", round.TotalScore)
-		fmt.Printf("Hands: %d, DisCards: %d\n", round.Hands, round.DisCards)
+		fmt.Printf("Hands: %d, Discards: %d\n", round.Hands, round.Discards)
 		fmt.Println()
 
 		time.Sleep(1 * time.Second)
@@ -74,7 +74,7 @@ func (r *RogurLikePoker) Run() error {
 		// Play or Discard
 		var playOrDsicard string
 		var pdOptions = []string{"Play"}
-		if round.DisCards > 0 {
+		if round.Discards > 0 {
 			pdOptions = append(pdOptions, "Discard")
 		}
 		prompt := &survey.Select{
@@ -92,7 +92,7 @@ func (r *RogurLikePoker) Run() error {
 
 			time.Sleep(1 * time.Second)
 		} else {
-			round.DisCards--
+			round.Discards--
 		}
 
 		// show remain cards
