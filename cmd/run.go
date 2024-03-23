@@ -64,6 +64,7 @@ func run() error {
 		for _, card := range hand {
 			cards = append(cards, card.String())
 		}
+		// Select cards
 		for {
 			selectCards = nil
 			promptMs := &survey.MultiSelect{
@@ -79,10 +80,11 @@ func run() error {
 			if selectCardNum <= 5 {
 				break
 			}
-			fmt.Println("Please select less than 5 cards\n")
+			fmt.Println("Please select less than 5 cards")
+			fmt.Println()
 		}
 
-		// Convert to Trump entity
+		// Convert select cards to Trump entity
 		var selectTrumps []entity.Trump
 		for _, card := range selectCards {
 			// extract rank and suit from card string
@@ -96,7 +98,7 @@ func run() error {
 				}
 			}
 		}
-		// Find the remain cards
+		// Calc the remain cards
 		remainCards = nil
 		for _, card := range hand {
 			if !entity.Contains(selectTrumps, card) {
@@ -109,16 +111,15 @@ func run() error {
 			Message: "Play or Discard:",
 			Options: []string{"Play", "Discard"},
 		}
-
 		if err := survey.AskOne(prompt, &playOrDsicard); err == terminal.InterruptErr {
 			fmt.Println("interrupted")
 			os.Exit(0)
 		}
 		if playOrDsicard == "Play" {
-			pokerHand := entity.EvaluateHand(selectTrumps)
-			score := entity.GetHandScore(pokerHand)
+			handType := entity.EvaluateHand(selectTrumps)
+			score := entity.GetScore(handType)
 			totalScore += score
-			fmt.Printf("\nHand: %s, Score: %d\n\n", pokerHand, score)
+			fmt.Printf("\nHand: %s, Score: %d\n\n", handType, score)
 		}
 
 		fmt.Print("Remain cards:\n")

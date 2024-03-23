@@ -117,7 +117,7 @@ func EvaluateHand(hand []Trump) HandType {
 	return HighCard
 }
 
-func GetHandScore(hand HandType) int {
+func GetScore(hand HandType) int {
 	switch hand {
 	case HighCard:
 		return 1
