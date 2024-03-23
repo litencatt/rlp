@@ -78,6 +78,10 @@ func (r *RogurLikePoker) Run() error {
 		}
 		fmt.Println()
 
+		if playOrDsicard == "Discard" {
+			continue
+		}
+
 		// play again?
 		var playAgain string
 		promptAgain := &survey.Select{
