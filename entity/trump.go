@@ -91,7 +91,7 @@ func (d Deck) Shuffle() {
 	})
 }
 
-func (d *Deck) Deal(n int) []Trump {
+func (d *Deck) Draw(n int) []Trump {
 	hand := (*d)[:n]
 	*d = (*d)[n:]
 	return hand

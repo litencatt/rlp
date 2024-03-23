@@ -12,6 +12,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var debugMode bool
+
 // runCmd represents the run command
 var runCmd = &cobra.Command{
 	Use:   "run",
@@ -30,10 +32,26 @@ func run() error {
 	deck.Shuffle()
 
 	defaultDeal := 8
+	selectCardNum := 0
+	nextDrawNum := defaultDeal
+	var remainCards []entity.Trump
+
 	// loop
 	for {
-		fmt.Println("\n[Deal cards]")
-		hand := deck.Deal(defaultDeal)
+		if selectCardNum != 0 {
+			nextDrawNum = selectCardNum
+		}
+
+		fmt.Println("[Draw", nextDrawNum, "cards]")
+		drawCards := deck.Draw(nextDrawNum)
+
+		var hand []entity.Trump
+		if debugMode {
+			fmt.Println(remainCards)
+			fmt.Println(drawCards)
+		}
+		hand = append(hand, remainCards...)
+		hand = append(hand, drawCards...)
 
 		// Convert to string
 		var selectCards []string
@@ -42,14 +60,14 @@ func run() error {
 			cards = append(cards, card.String())
 		}
 		promptMs := &survey.MultiSelect{
-			Message: "Select cards to play",
+			Message: "Select cards",
 			Options: cards,
 		}
 		survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
+		selectCardNum = len(selectCards)
 
 		// Convert to Trump entity
 		var selectTrumps []entity.Trump
-		var remainTrumps []entity.Trump
 		for _, card := range selectCards {
 			// extract rank and suit from card string
 			rank := strings.Split(card, " of ")[0]
@@ -62,9 +80,11 @@ func run() error {
 				}
 			}
 		}
+		// Find the remain cards
+		remainCards = nil
 		for _, card := range hand {
 			if !entity.Contains(selectTrumps, card) {
-				remainTrumps = append(remainTrumps, card)
+				remainCards = append(remainCards, card)
 			}
 		}
 
@@ -80,7 +100,7 @@ func run() error {
 		}
 
 		fmt.Print("Remain cards:\n")
-		for _, card := range remainTrumps {
+		for _, card := range remainCards {
 			fmt.Println(card)
 		}
 
@@ -92,7 +112,7 @@ func run() error {
 		}
 		survey.AskOne(promptAgain, &playAgain)
 		if playAgain == "Play" {
-
+			continue
 		} else {
 			break
 		}
@@ -103,4 +123,7 @@ func run() error {
 
 func init() {
 	rootCmd.AddCommand(runCmd)
+
+	// debug mode flag
+	runCmd.Flags().BoolVarP(&debugMode, "debug", "d", false, "show detail logs")
 }
