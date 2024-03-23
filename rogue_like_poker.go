@@ -66,8 +66,11 @@ func (r *RogurLikePoker) Run() error {
 			os.Exit(0)
 		}
 		if playOrDsicard == "Play" {
+			round.Hands--
 			handType, score := round.PlayHand()
 			fmt.Printf("\nHand: %s, Score: %d\n\n", handType, score)
+		} else {
+			round.DisCards--
 		}
 
 		// show remain cards
