@@ -71,7 +71,7 @@ func (r *RogurLikePoker) Run() error {
 		}
 
 		// show remain cards
-		fmt.Print("Remain cards:\n")
+		fmt.Print("[Remain cards]\n")
 		remainCards := round.RemainCardString()
 		for _, card := range remainCards {
 			fmt.Println(card)
