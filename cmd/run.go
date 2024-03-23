@@ -45,25 +45,24 @@ func run() error {
 		}
 		survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
 
+		// Convert to Trump entity
+		var selectTrumps []entity.Trump
+		for _, card := range selectCards {
+			// extract rank and suit from card string
+			rank := strings.Split(card, " of ")[0]
+			suit := strings.Split(card, " of ")[1]
+			trump := entity.Trump{Rank: entity.Rank(rank), Suit: entity.Suit(suit)}
+			selectTrumps = append(selectTrumps, trump)
+		}
+
 		var playOrDsicard string
 		prompt := &survey.Select{
 			Message: "Play or Discard:",
 			Options: []string{"Play", "Discard"},
 		}
 		survey.AskOne(prompt, &playOrDsicard)
-
 		if playOrDsicard == "Play" {
-			// Selct play or discard
-			var playHand []entity.Trump
-			for _, card := range selectCards {
-				// extract rank and suit from card string
-				rank := strings.Split(card, " of ")[0]
-				suit := strings.Split(card, " of ")[1]
-				trump := entity.Trump{Rank: entity.Rank(rank), Suit: entity.Suit(suit)}
-				playHand = append(playHand, trump)
-			}
-
-			poker := entity.EvaluateHand(playHand)
+			poker := entity.EvaluateHand(selectTrumps)
 			fmt.Printf("\nHand: %s\n\n", poker)
 		} else {
 			// Select cards to discard
