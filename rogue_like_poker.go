@@ -57,9 +57,13 @@ func (r *RogurLikePoker) Run() error {
 
 		// Play or Discard
 		var playOrDsicard string
+		var pdOptions = []string{"Play"}
+		if round.DisCards > 0 {
+			pdOptions = append(pdOptions, "Discard")
+		}
 		prompt := &survey.Select{
 			Message: "Play or Discard:",
-			Options: []string{"Play", "Discard"},
+			Options: pdOptions,
 		}
 		if err := survey.AskOne(prompt, &playOrDsicard); err == terminal.InterruptErr {
 			fmt.Println("interrupted")
