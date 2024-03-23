@@ -54,7 +54,7 @@ func run() error {
 			cards = append(cards, card.String())
 		}
 		promptMs := &survey.MultiSelect{
-			Message: "Select cards to play",
+			Message: "Select cards",
 			Options: cards,
 		}
 		survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
