@@ -9,10 +9,10 @@ type Suit string
 type Rank string
 
 const (
-	Club    Suit = "Club"
-	Diamond      = "Diamond"
-	Heart        = "Heart"
-	Spade        = "Spade"
+	Clubs    Suit = "Clubs"
+	Diamonds      = "Diamonds"
+	Hearts        = "Hearts"
+	Spades        = "Spades"
 )
 
 const (
@@ -102,7 +102,7 @@ type Deck []Trump
 
 func NewDeck() Deck {
 	deck := make(Deck, 0)
-	suits := []Suit{Club, Diamond, Heart, Spade}
+	suits := []Suit{Clubs, Diamonds, Hearts, Spades}
 	ranks := []Rank{Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}
 	for _, suit := range suits {
 		for _, rank := range ranks {
