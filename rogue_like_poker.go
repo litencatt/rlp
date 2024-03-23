@@ -30,8 +30,14 @@ func (r *RogurLikePoker) Run() error {
 		}
 
 		fmt.Println("[Draw", nextDrawNum, "cards]")
+		fmt.Println()
+
 		round.DrawCard(nextDrawNum)
 		handCards := round.HandCardString()
+
+		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)
+		fmt.Printf("Round score: %d\n", round.GetTotalScore())
+		fmt.Printf("Hands: %d, DisCards: %d\n", round.Hands, round.DisCards)
 
 		var selectCards []string
 		// Select cards
