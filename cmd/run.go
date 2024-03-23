@@ -12,6 +12,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var debugMode bool
+
 // runCmd represents the run command
 var runCmd = &cobra.Command{
 	Use:   "run",
@@ -44,6 +46,10 @@ func run() error {
 		drawCards := deck.Draw(nextDrawNum)
 
 		var hand []entity.Trump
+		if debugMode {
+			fmt.Println(remainCards)
+			fmt.Println(drawCards)
+		}
 		hand = append(hand, remainCards...)
 		hand = append(hand, drawCards...)
 
@@ -117,4 +123,7 @@ func run() error {
 
 func init() {
 	rootCmd.AddCommand(runCmd)
+
+	// debug mode flag
+	runCmd.Flags().BoolVarP(&debugMode, "debug", "d", false, "show detail logs")
 }
