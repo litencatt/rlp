@@ -122,6 +122,7 @@ func run() error {
 		for _, card := range remainCards {
 			fmt.Println(card)
 		}
+		fmt.Println()
 
 		// play again?
 		var playAgain string
