@@ -28,7 +28,6 @@ func (r *RogurLikePoker) Run() error {
 		if selectCardNum != 0 {
 			nextDrawNum = selectCardNum
 		}
-		fmt.Println(nextDrawNum)
 
 		fmt.Println("[Draw", nextDrawNum, "cards]")
 		round.DrawCard(nextDrawNum)
@@ -56,6 +55,7 @@ func (r *RogurLikePoker) Run() error {
 		}
 		round.SelectCards(selectCards)
 
+		// Play or Discard
 		var playOrDsicard string
 		prompt := &survey.Select{
 			Message: "Play or Discard:",
@@ -70,9 +70,12 @@ func (r *RogurLikePoker) Run() error {
 			fmt.Printf("\nHand: %s, Score: %d\n\n", handType, score)
 		}
 
+		// show remain cards
 		fmt.Print("Remain cards:\n")
 		remainCards := round.RemainCardString()
-		fmt.Println(remainCards)
+		for _, card := range remainCards {
+			fmt.Println(card)
+		}
 		fmt.Println()
 
 		// play again?
