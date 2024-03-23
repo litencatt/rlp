@@ -13,6 +13,9 @@ type PokerRound struct {
 	HandCards     []entity.Trump
 	RemainCards   []entity.Trump
 	SelectedCards []entity.Trump
+	Hands         int
+	DisCards      int
+	ScoreAtLeast  int
 }
 
 func NewRound() *PokerRound {
@@ -20,7 +23,10 @@ func NewRound() *PokerRound {
 	deck.Shuffle()
 
 	return &PokerRound{
-		Deck: deck,
+		Deck:         deck,
+		Hands:        4,
+		DisCards:     3,
+		ScoreAtLeast: 10,
 	}
 }
 
@@ -95,4 +101,16 @@ func (p *PokerRound) PlayHand() (entity.HandType, int) {
 
 func (p *PokerRound) GetTotalScore() int {
 	return p.TotalScore
+}
+
+func (p *PokerRound) GetHands() int {
+	return p.Hands
+}
+
+func (p *PokerRound) GetDisCards() int {
+	return p.DisCards
+}
+
+func (p *PokerRound) GetScoreAtLeast() int {
+	return p.ScoreAtLeast
 }
