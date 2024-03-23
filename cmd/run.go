@@ -52,6 +52,8 @@ func run() error {
 		}
 		hand = append(hand, remainCards...)
 		hand = append(hand, drawCards...)
+		// sort hand
+		entity.SortHand(hand)
 
 		// Convert to string
 		var selectCards []string
