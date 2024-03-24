@@ -257,7 +257,6 @@ func EvaluateHand(hand []Trump) HandType {
 	isStraight := isStraight(hand)
 
 	if isFlush && isStraight {
-		// Check for Royal Flush
 		if hand[0].Rank == Ten {
 			return RoyalFlush
 		}
