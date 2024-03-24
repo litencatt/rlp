@@ -36,7 +36,6 @@ BlindLoop:
 		fmt.Printf("\n\n%s Round start\n", blind.Name)
 
 		ScoreAtLeast := int(float64(ante.GetAnteBase()) * blind.Multi)
-
 		round := entity.PokerRound{
 			Deck:         r.RunInfo.Deck,
 			TotalScore:   0,
@@ -44,12 +43,10 @@ BlindLoop:
 			Discards:     r.RunInfo.Discards,
 			ScoreAtLeast: ScoreAtLeast,
 		}
-
 		round.Deck.Shuffle()
 
 		var selectCardNum int
 		var nextDrawNum int
-
 		for {
 			if selectCardNum == 0 {
 				nextDrawNum = r.RunInfo.DefaultDeal
