@@ -30,7 +30,7 @@ type Ante struct {
 }
 
 type Blind struct {
-	name  string
+	Name  string
 	Multi float64
 }
 
@@ -39,15 +39,15 @@ func NewAnte() *Ante {
 		Number: 1,
 		Blinds: []Blind{
 			{
-				name:  "Small Blind",
+				Name:  "Small Blind",
 				Multi: 1.0,
 			},
 			{
-				name:  "Big Blind",
+				Name:  "Big Blind",
 				Multi: 1.5,
 			},
 			{
-				name:  "Final Blind",
+				Name:  "Final Blind",
 				Multi: 2.0,
 			},
 		},
