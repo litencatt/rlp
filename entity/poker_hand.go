@@ -185,7 +185,7 @@ func NewPokerHands() *PokerHands {
 	}
 }
 
-func (p *PokerHands) GetChipAndMult(HandType HandType, Level int) (int, int) {
+func (p *PokerHands) GetChipAndMult(HandType HandType, Level int) (Chip int, Mult int) {
 	for _, ph := range p.PokerHands {
 		if ph.HandType == HandType {
 			for _, lvl := range ph.Level {

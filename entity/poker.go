@@ -4,7 +4,7 @@ type RunInfo struct {
 	DefaultDeal int
 	Ante        Ante
 	Deck        Deck
-	PokerHands  PokerHands
+	PokerHands  *PokerHands
 	Hands       int
 	Discards    int
 }
@@ -16,9 +16,10 @@ func NewRunInfo() *RunInfo {
 	return &RunInfo{
 		DefaultDeal: 8,
 		Ante:        *ante,
+		Deck:        NewDeck(),
+		PokerHands:  NewPokerHands(),
 		Hands:       4,
 		Discards:    3,
-		Deck:        NewDeck(),
 	}
 }
 
