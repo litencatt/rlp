@@ -36,14 +36,11 @@ func (r *RogurLikePoker) Run() error {
 	ScoreAtLeast := int(float64(ante.GetAnteBase()) * blind.Multi)
 
 	round := PokerRound{
-		Deck:          r.RunInfo.Deck,
-		TotalScore:    0,
-		HandCards:     nil,
-		RemainCards:   nil,
-		SelectedCards: nil,
-		Hands:         r.RunInfo.Hands,
-		Discards:      r.RunInfo.Discards,
-		ScoreAtLeast:  ScoreAtLeast,
+		Deck:         r.RunInfo.Deck,
+		TotalScore:   0,
+		Hands:        r.RunInfo.Hands,
+		Discards:     r.RunInfo.Discards,
+		ScoreAtLeast: ScoreAtLeast,
 	}
 
 	round.Deck.Shuffle()
