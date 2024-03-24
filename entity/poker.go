@@ -1,17 +1,70 @@
 package entity
 
-type Ante struct {
-	BaseScore int
-}
-
 type RunInfo struct {
-	Hands           int
-	Discards        int
-	Deck            Deck
-	PokerHandLevels []PokerHandLevel
+	Ante       Ante
+	Deck       Deck
+	PokerHands PokerHands
+	Hands      int
+	Discards   int
 }
 
-type PokerHandLevel struct {
-	HandType HandType
-	Level    int
+func NewRunInfo() *RunInfo {
+	ante := Ante{
+		Number: 1,
+	}
+	ante.Base = ante.GetAnteBase(ante.Number)
+
+	return &RunInfo{
+		Ante:     ante,
+		Hands:    4,
+		Discards: 3,
+		Deck:     NewDeck(),
+	}
+}
+
+type Ante struct {
+	Number int
+	Base   int
+}
+
+func (a *Ante) GetAnteBase(num int) int {
+	switch num {
+	case 1:
+		return 300
+	case 2:
+		return 800
+	case 3:
+		return 2800
+	case 4:
+		return 6000
+	case 5:
+		return 11000
+	case 6:
+		return 20000
+	case 7:
+		return 35000
+	case 8:
+		return 50000
+	case 9:
+		return 110000
+	case 10:
+		return 560000
+	case 11:
+		return 7200000
+	case 12:
+		return 300000000
+	case 13:
+		return 47000000000
+	case 14:
+		// return 2900e13
+		return 2900 * 100000000000
+	case 15:
+		// return 7700e16
+		return 7700 * 1000000000000
+	case 16:
+		// FIXME: return 8600e20
+		return 8600
+	default:
+		return 0
+	}
 }
