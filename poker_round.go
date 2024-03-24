@@ -18,24 +18,6 @@ type PokerRound struct {
 	ScoreAtLeast  int
 }
 
-func NewRound() *PokerRound {
-	deck := entity.NewDeck()
-	deck.Shuffle()
-
-	return &PokerRound{
-		Deck:         deck,
-		Hands:        4,
-		Discards:     3,
-		ScoreAtLeast: 10,
-	}
-}
-
-func (p *PokerRound) Start(defaultDeal int) []string {
-	p.HandCards = p.Deck.Draw(defaultDeal)
-
-	return p.HandCardString()
-}
-
 func (p *PokerRound) DrawCard(drawNum int) {
 	p.HandCards = nil
 
