@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.3](https://github.com/litencatt/rlp/compare/v0.0.2...v0.0.3) - 2024-03-24
+- Implement ante1 rounds play by @litencatt in https://github.com/litencatt/rlp/pull/13
+
 ## [v0.0.2](https://github.com/litencatt/rlp/compare/v0.0.1...v0.0.2) - 2024-03-24
 - Introduce many models by @litencatt in https://github.com/litencatt/rlp/pull/10
 - Calc score with hand type chip and mult by @litencatt in https://github.com/litencatt/rlp/pull/12
