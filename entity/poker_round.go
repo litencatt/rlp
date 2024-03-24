@@ -43,7 +43,7 @@ func (p *PokerRound) RemainCardString() []string {
 	return cards
 }
 
-func (p *PokerRound) SelectCards(cards []string) int {
+func (p *PokerRound) SetSelectCards(cards []string) {
 	// Convert select cards to Trump entity
 	var selectCards []Trump
 	for _, card := range cards {

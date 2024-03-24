@@ -84,6 +84,7 @@ func (r *RogurLikePoker) Run() error {
 				fmt.Println("interrupted")
 				os.Exit(0)
 			}
+
 			selectCardNum = len(selectCards)
 			if selectCardNum <= 5 {
 				break
@@ -91,7 +92,8 @@ func (r *RogurLikePoker) Run() error {
 			fmt.Println("Please select less than 5 cards")
 			fmt.Println()
 		}
-		round.SelectCards(selectCards)
+
+		round.SetSelectCards(selectCards)
 		if r.DebugMode {
 			fmt.Print("[Selected cards]\n")
 			for _, card := range selectCards {
