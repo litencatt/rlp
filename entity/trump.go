@@ -1,10 +1,5 @@
 package entity
 
-import (
-	"math/rand"
-	"time"
-)
-
 type Suit string
 type Rank string
 
@@ -98,33 +93,11 @@ func (t Trump) GetSortOrder() int {
 	return 0
 }
 
-type Deck []Trump
-
-func NewDeck() Deck {
-	deck := make(Deck, 0)
-	suits := []Suit{Clubs, Diamonds, Hearts, Spades}
-	ranks := []Rank{Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}
-	for _, suit := range suits {
-		for _, rank := range ranks {
-			deck = append(deck, Trump{Suit: suit, Rank: rank})
+func Contains(trumps []Trump, trump Trump) bool {
+	for _, t := range trumps {
+		if t == trump {
+			return true
 		}
 	}
-	return deck
-}
-
-func (d Deck) Len() int {
-	return len(d)
-}
-
-func (d Deck) Shuffle() {
-	rand.Seed(time.Now().UnixNano())
-	rand.Shuffle(len(d), func(i, j int) {
-		d[i], d[j] = d[j], d[i]
-	})
-}
-
-func (d *Deck) Draw(n int) []Trump {
-	hand := (*d)[:n]
-	*d = (*d)[n:]
-	return hand
+	return false
 }

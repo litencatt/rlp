@@ -7,6 +7,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
+	"github.com/litencatt/rlp/entity"
 )
 
 const Name string = "rlp"
@@ -14,13 +15,13 @@ const Name string = "rlp"
 var Version = "dev"
 
 type RogurLikePoker struct {
-	DefaultDeal int
-	DebugMode   bool
+	DebugMode bool
+	RunInfo   *entity.RunInfo
 }
 
 func NewRogurLikePoker() *RogurLikePoker {
 	return &RogurLikePoker{
-		DefaultDeal: 8,
+		RunInfo: entity.NewRunInfo(),
 	}
 }
 
@@ -29,22 +30,39 @@ func (r *RogurLikePoker) Run() error {
 	fmt.Println("Round start")
 	fmt.Println()
 
-	round := NewRound()
+	// Select small blind
+	ante := r.RunInfo.Ante
+	blind := ante.Blinds[0]
+	ScoreAtLeast := int(float64(ante.GetAnteBase()) * blind.Multi)
+
+	round := entity.PokerRound{
+		Deck:         r.RunInfo.Deck,
+		TotalScore:   0,
+		Hands:        r.RunInfo.Hands,
+		Discards:     r.RunInfo.Discards,
+		ScoreAtLeast: ScoreAtLeast,
+	}
+
+	round.Deck.Shuffle()
 
 	var selectCardNum int
-	nextDrawNum := r.DefaultDeal
+	var nextDrawNum int
 	for {
-		if selectCardNum != 0 {
+		if selectCardNum == 0 {
+			nextDrawNum = r.RunInfo.DefaultDeal
+		} else {
+			// Draw cards num is same as the last selected cards num
 			nextDrawNum = selectCardNum
 		}
 
+		drawCards := round.DrawCard(nextDrawNum)
 		if r.DebugMode {
 			fmt.Println("[Draw", nextDrawNum, "cards]")
+			for _, card := range drawCards {
+				fmt.Println(card.String())
+			}
 			fmt.Println()
 		}
-
-		round.DrawCard(nextDrawNum)
-		handCards := round.HandCardString()
 
 		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)
 		fmt.Printf("Round score: %d\n", round.TotalScore)
@@ -53,19 +71,20 @@ func (r *RogurLikePoker) Run() error {
 
 		time.Sleep(1 * time.Second)
 
-		var selectCards []string
 		// Select cards
+		var selectCards []string
 		for {
 			selectCards = nil
 			promptMs := &survey.MultiSelect{
 				Message: "Select cards",
-				Options: handCards,
+				Options: round.HandCardString(),
 			}
 			err := survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
 			if err == terminal.InterruptErr {
 				fmt.Println("interrupted")
 				os.Exit(0)
 			}
+
 			selectCardNum = len(selectCards)
 			if selectCardNum <= 5 {
 				break
@@ -73,7 +92,15 @@ func (r *RogurLikePoker) Run() error {
 			fmt.Println("Please select less than 5 cards")
 			fmt.Println()
 		}
-		round.SelectCards(selectCards)
+
+		round.SetSelectCards(selectCards)
+		if r.DebugMode {
+			fmt.Print("[Selected cards]\n")
+			for _, card := range selectCards {
+				fmt.Println(card)
+			}
+			fmt.Println()
+		}
 
 		// Play or Discard
 		var playOrDsicard string
