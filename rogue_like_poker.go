@@ -53,8 +53,8 @@ func (r *RogurLikePoker) Run() error {
 
 		time.Sleep(1 * time.Second)
 
-		var selectCards []string
 		// Select cards
+		var selectCards []string
 		for {
 			selectCards = nil
 			promptMs := &survey.MultiSelect{

@@ -10,7 +10,6 @@ import (
 
 var debugMode bool
 
-// runCmd represents the run command
 var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run rogue-like poker",
@@ -31,6 +30,5 @@ var runCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(runCmd)
 
-	// debug mode flag
 	runCmd.Flags().BoolVarP(&debugMode, "debug", "d", false, "show detail logs")
 }
