@@ -49,9 +49,12 @@ func (r *RogurLikePoker) Run() error {
 	round.Deck.Shuffle()
 
 	var selectCardNum int
-	nextDrawNum := r.DefaultDeal
+	var nextDrawNum int
 	for {
-		if selectCardNum != 0 {
+		if selectCardNum == 0 {
+			nextDrawNum = r.RunInfo.DefaultDeal
+		} else {
+			// Draw cards num is same as the last selected cards num
 			nextDrawNum = selectCardNum
 		}
 
