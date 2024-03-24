@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.0.2](https://github.com/litencatt/rlp/compare/v0.0.1...v0.0.2) - 2024-03-24
+- Introduce many models by @litencatt in https://github.com/litencatt/rlp/pull/10
+- Calc score with hand type chip and mult by @litencatt in https://github.com/litencatt/rlp/pull/12
+
 ## [v0.0.1](https://github.com/litencatt/rlp/commits/v0.0.1) - 2024-03-23
 - Show remaining hands by @litencatt in https://github.com/litencatt/rlp/pull/1
 - Add draw cards to remain cards by @litencatt in https://github.com/litencatt/rlp/pull/2
