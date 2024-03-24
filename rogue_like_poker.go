@@ -7,6 +7,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
+	"github.com/litencatt/rlp/entity"
 )
 
 const Name string = "rlp"
@@ -14,13 +15,13 @@ const Name string = "rlp"
 var Version = "dev"
 
 type RogurLikePoker struct {
-	DefaultDeal int
-	DebugMode   bool
+	DebugMode bool
+	RunInfo   *entity.RunInfo
 }
 
 func NewRogurLikePoker() *RogurLikePoker {
 	return &RogurLikePoker{
-		DefaultDeal: 8,
+		RunInfo: entity.NewRunInfo(),
 	}
 }
 
@@ -29,7 +30,23 @@ func (r *RogurLikePoker) Run() error {
 	fmt.Println("Round start")
 	fmt.Println()
 
-	round := NewRound()
+	// Select small blind
+	ante := r.RunInfo.Ante
+	blind := ante.Blinds[0]
+	ScoreAtLeast := int(float64(ante.GetAnteBase()) * blind.Multi)
+
+	round := PokerRound{
+		Deck:          r.RunInfo.Deck,
+		TotalScore:    0,
+		HandCards:     nil,
+		RemainCards:   nil,
+		SelectedCards: nil,
+		Hands:         r.RunInfo.Hands,
+		Discards:      r.RunInfo.Discards,
+		ScoreAtLeast:  ScoreAtLeast,
+	}
+
+	round.Deck.Shuffle()
 
 	var selectCardNum int
 	nextDrawNum := r.DefaultDeal
