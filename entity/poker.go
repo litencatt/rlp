@@ -1,34 +1,60 @@
 package entity
 
 type RunInfo struct {
-	Ante       Ante
-	Deck       Deck
-	PokerHands PokerHands
-	Hands      int
-	Discards   int
+	DefaultDeal int
+	Ante        Ante
+	Deck        Deck
+	PokerHands  PokerHands
+	Hands       int
+	Discards    int
 }
 
 func NewRunInfo() *RunInfo {
-	ante := Ante{
-		Number: 1,
-	}
-	ante.Base = ante.GetAnteBase(ante.Number)
+	ante := NewAnte()
+	ante.Base = ante.GetAnteBase()
 
 	return &RunInfo{
-		Ante:     ante,
-		Hands:    4,
-		Discards: 3,
-		Deck:     NewDeck(),
+		DefaultDeal: 8,
+		Ante:        *ante,
+		Hands:       4,
+		Discards:    3,
+		Deck:        NewDeck(),
 	}
 }
 
 type Ante struct {
 	Number int
 	Base   int
+	Blinds []Blind
 }
 
-func (a *Ante) GetAnteBase(num int) int {
-	switch num {
+type Blind struct {
+	name  string
+	Multi float64
+}
+
+func NewAnte() *Ante {
+	return &Ante{
+		Number: 1,
+		Blinds: []Blind{
+			{
+				name:  "Small Blind",
+				Multi: 1.0,
+			},
+			{
+				name:  "Big Blind",
+				Multi: 1.5,
+			},
+			{
+				name:  "Final Blind",
+				Multi: 2.0,
+			},
+		},
+	}
+}
+
+func (a *Ante) GetAnteBase() int {
+	switch a.Number {
 	case 1:
 		return 300
 	case 2:
