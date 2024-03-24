@@ -121,7 +121,7 @@ func (r *RogurLikePoker) Run() error {
 			chip, mult := r.RunInfo.PokerHands.GetChipAndMult(handType, 1)
 			fmt.Printf("\nHand: %s(Chip: %d, Mult: %d)\n", handType, chip, mult)
 
-			// get card rank
+			// get card rank and add to chip
 			handsRankTotal := round.GetSelectCardsRankTotal()
 			fmt.Printf("Hands rank total: %d\n", handsRankTotal)
 			chip += handsRankTotal
