@@ -35,7 +35,7 @@ func (r *RogurLikePoker) Run() error {
 	blind := ante.Blinds[0]
 	ScoreAtLeast := int(float64(ante.GetAnteBase()) * blind.Multi)
 
-	round := PokerRound{
+	round := entity.PokerRound{
 		Deck:         r.RunInfo.Deck,
 		TotalScore:   0,
 		Hands:        r.RunInfo.Hands,

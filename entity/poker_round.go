@@ -1,17 +1,15 @@
-package rlp
+package entity
 
 import (
 	"strings"
-
-	"github.com/litencatt/rlp/entity"
 )
 
 type PokerRound struct {
-	Deck          entity.Deck
+	Deck          Deck
 	TotalScore    int
-	HandCards     entity.PokerHandCard
-	RemainCards   []entity.Trump
-	SelectedCards []entity.Trump
+	HandCards     PokerHandCard
+	RemainCards   []Trump
+	SelectedCards []Trump
 	Hands         int
 	Discards      int
 	ScoreAtLeast  int
@@ -45,7 +43,7 @@ func (p *PokerRound) RemainCardString() []string {
 
 func (p *PokerRound) SelectCards(cards []string) int {
 	// Convert select cards to Trump entity
-	var selectCards []entity.Trump
+	var selectCards []Trump
 	for _, card := range cards {
 		// extract rank and suit from card string
 		rank := strings.Split(card, " of ")[0]
@@ -61,9 +59,9 @@ func (p *PokerRound) SelectCards(cards []string) int {
 	p.SelectedCards = selectCards
 
 	// Calc the RemainCards cards
-	var RemainCardsCards []entity.Trump
+	var RemainCardsCards []Trump
 	for _, card := range p.HandCards.Trumps {
-		if !entity.Contains(selectCards, card) {
+		if !Contains(selectCards, card) {
 			RemainCardsCards = append(RemainCardsCards, card)
 		}
 	}
@@ -72,9 +70,9 @@ func (p *PokerRound) SelectCards(cards []string) int {
 	return len(p.SelectedCards)
 }
 
-func (p *PokerRound) PlayHand() (entity.HandType, int) {
-	handType := entity.EvaluateHand(p.SelectedCards)
-	score := entity.GetScore(handType)
+func (p *PokerRound) PlayHand() (HandType, int) {
+	handType := EvaluateHand(p.SelectedCards)
+	score := GetScore(handType)
 	p.TotalScore += score
 
 	return handType, score
