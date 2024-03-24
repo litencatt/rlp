@@ -31,6 +31,7 @@ func (r *RogurLikePoker) Run() error {
 
 	// fmt.Println("Choose next Blind")
 	ante := r.RunInfo.Ante
+BlindLoop:
 	for _, blind := range ante.Blinds {
 		fmt.Printf("\n\n%s Round start\n", blind.Name)
 
@@ -160,7 +161,7 @@ func (r *RogurLikePoker) Run() error {
 			} else if round.Hands <= 0 {
 				fmt.Printf("Score at least: %d, Round score: %d\n", round.ScoreAtLeast, round.TotalScore)
 				fmt.Println("You lose!")
-				break
+				break BlindLoop
 			} else {
 				if round.Hands > 0 && round.TotalScore < round.ScoreAtLeast {
 					continue
