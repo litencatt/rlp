@@ -73,3 +73,11 @@ func (p *PokerRound) SetSelectCards(cards []string) {
 func (p *PokerRound) PlayHand() HandType {
 	return EvaluateHand(p.SelectedCards)
 }
+
+func (p *PokerRound) GetSelectCardsRankTotal() int {
+	total := 0
+	for _, card := range p.SelectedCards {
+		total += card.GetRankNumber()
+	}
+	return total
+}

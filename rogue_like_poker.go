@@ -94,13 +94,11 @@ func (r *RogurLikePoker) Run() error {
 		}
 
 		round.SetSelectCards(selectCards)
-		if r.DebugMode {
-			fmt.Print("[Selected cards]\n")
-			for _, card := range selectCards {
-				fmt.Println(card)
-			}
-			fmt.Println()
+		fmt.Print("[Selected cards]\n")
+		for _, card := range selectCards {
+			fmt.Println(card)
 		}
+		fmt.Println()
 
 		// Play or Discard
 		var playOrDsicard string
@@ -123,7 +121,13 @@ func (r *RogurLikePoker) Run() error {
 			chip, mult := r.RunInfo.PokerHands.GetChipAndMult(handType, 1)
 			fmt.Printf("\nHand: %s(Chip: %d, Mult: %d)\n", handType, chip, mult)
 
+			// get card rank
+			handsRankTotal := round.GetSelectCardsRankTotal()
+			fmt.Printf("Hands rank total: %d\n", handsRankTotal)
+			chip += handsRankTotal
+
 			score := chip * mult
+			fmt.Printf("\nChip: %d, Mult: %d\n", chip, mult)
 			fmt.Printf("\nScore: %d\n\n", score)
 
 			round.TotalScore += score
