@@ -91,6 +91,13 @@ func (r *RogurLikePoker) Run() error {
 			fmt.Println()
 		}
 		round.SelectCards(selectCards)
+		if r.DebugMode {
+			fmt.Print("[Selected cards]\n")
+			for _, card := range selectCards {
+				fmt.Println(card)
+			}
+			fmt.Println()
+		}
 
 		// Play or Discard
 		var playOrDsicard string
