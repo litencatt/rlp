@@ -55,12 +55,15 @@ func (r *RogurLikePoker) Run() error {
 			nextDrawNum = selectCardNum
 		}
 
+		drawCards := round.DrawCard(nextDrawNum)
 		if r.DebugMode {
 			fmt.Println("[Draw", nextDrawNum, "cards]")
+			for _, card := range drawCards {
+				fmt.Println(card.String())
+			}
 			fmt.Println()
 		}
 
-		round.DrawCard(nextDrawNum)
 		handCards := round.HandCardString()
 
 		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)

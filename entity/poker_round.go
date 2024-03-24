@@ -15,7 +15,7 @@ type PokerRound struct {
 	ScoreAtLeast  int
 }
 
-func (p *PokerRound) DrawCard(drawNum int) {
+func (p *PokerRound) DrawCard(drawNum int) []Trump {
 	p.HandCards.Trumps = nil
 
 	drawCards := p.Deck.Draw(drawNum)
@@ -23,6 +23,8 @@ func (p *PokerRound) DrawCard(drawNum int) {
 	p.HandCards.Trumps = append(p.HandCards.Trumps, drawCards...)
 
 	p.HandCards.Sort()
+
+	return drawCards
 }
 
 func (p *PokerRound) HandCardString() []string {
