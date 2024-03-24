@@ -70,10 +70,6 @@ func (p *PokerRound) SetSelectCards(cards []string) {
 	p.RemainCards = RemainCardsCards
 }
 
-func (p *PokerRound) PlayHand() (HandType, int) {
-	handType := EvaluateHand(p.SelectedCards)
-	score := GetScore(handType)
-	p.TotalScore += score
-
-	return handType, score
+func (p *PokerRound) PlayHand() HandType {
+	return EvaluateHand(p.SelectedCards)
 }

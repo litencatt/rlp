@@ -118,8 +118,15 @@ func (r *RogurLikePoker) Run() error {
 		}
 		if playOrDsicard == "Play" {
 			round.Hands--
-			handType, score := round.PlayHand()
-			fmt.Printf("\nHand: %s, Score: %d\n\n", handType, score)
+
+			handType := round.PlayHand()
+			chip, mult := r.RunInfo.PokerHands.GetChipAndMult(handType, 1)
+			fmt.Printf("\nHand: %s(Chip: %d, Mult: %d)\n", handType, chip, mult)
+
+			score := chip * mult
+			fmt.Printf("\nScore: %d\n\n", score)
+
+			round.TotalScore += score
 
 			time.Sleep(1 * time.Second)
 		} else {
