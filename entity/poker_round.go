@@ -68,8 +68,6 @@ func (p *PokerRound) SelectCards(cards []string) int {
 		}
 	}
 	p.RemainCards = RemainCardsCards
-
-	return len(p.SelectedCards)
 }
 
 func (p *PokerRound) PlayHand() (HandType, int) {
