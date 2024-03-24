@@ -64,8 +64,6 @@ func (r *RogurLikePoker) Run() error {
 			fmt.Println()
 		}
 
-		handCards := round.HandCardString()
-
 		fmt.Printf("Score at least: %d\n", round.ScoreAtLeast)
 		fmt.Printf("Round score: %d\n", round.TotalScore)
 		fmt.Printf("Hands: %d, Discards: %d\n", round.Hands, round.Discards)
@@ -79,7 +77,7 @@ func (r *RogurLikePoker) Run() error {
 			selectCards = nil
 			promptMs := &survey.MultiSelect{
 				Message: "Select cards",
-				Options: handCards,
+				Options: round.HandCardString(),
 			}
 			err := survey.AskOne(promptMs, &selectCards, survey.WithPageSize(8))
 			if err == terminal.InterruptErr {
