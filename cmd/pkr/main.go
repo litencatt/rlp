@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "github.com/litencatt/rlp/cmd"
+import "github.com/litencatt/pkr/cmd"
 
 func main() {
 	cmd.Execute()

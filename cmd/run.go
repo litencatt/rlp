@@ -4,7 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/litencatt/rlp"
+	"github.com/litencatt/pkr"
 	"github.com/spf13/cobra"
 )
 
@@ -12,9 +12,9 @@ var debugMode bool
 
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "Run rogue-like poker",
+	Short: "Run poker",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		poker := rlp.NewRogurLikePoker()
+		poker := pkr.NewPoker()
 		if debugMode {
 			poker.DebugMode = true
 		}

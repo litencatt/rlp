@@ -1,4 +1,4 @@
-module github.com/litencatt/rlp
+module github.com/litencatt/pkr
 
 go 1.22
 
