@@ -14,18 +14,18 @@ const Name string = "pkr"
 
 var Version = "dev"
 
-type Poker struct {
+type PokerCLI struct {
 	DebugMode bool
 	RunInfo   *entity.RunInfo
 }
 
-func NewPoker() *Poker {
-	return &Poker{
+func NewPokerCLI() *PokerCLI {
+	return &PokerCLI{
 		RunInfo: entity.NewRunInfo(),
 	}
 }
 
-func (r *Poker) Run() error {
+func (r *PokerCLI) Run() error {
 	fmt.Println("Welcome to Poker!")
 	fmt.Println()
 
