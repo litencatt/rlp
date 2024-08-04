@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/litencatt/rlp"
+	"github.com/litencatt/pkr"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -34,9 +34,9 @@ var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:     "rlp",
-	Short:   "Rogue-Like Poker CLI",
-	Version: rlp.Version,
+	Use:     "pkr",
+	Short:   "Poker CLI",
+	Version: pkr.Version,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -55,7 +55,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.rlp.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pkr.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -72,10 +72,10 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".rlp" (without extension).
+		// Search config in home directory with name ".pkr" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".rlp")
+		viper.SetConfigName(".pkr")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

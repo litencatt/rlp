@@ -1,4 +1,4 @@
-package rlp
+package pkr
 
 import (
 	"fmt"
@@ -7,26 +7,26 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/litencatt/rlp/entity"
+	"github.com/litencatt/pkr/entity"
 )
 
-const Name string = "rlp"
+const Name string = "pkr"
 
 var Version = "dev"
 
-type RogurLikePoker struct {
+type Poker struct {
 	DebugMode bool
 	RunInfo   *entity.RunInfo
 }
 
-func NewRogurLikePoker() *RogurLikePoker {
-	return &RogurLikePoker{
+func NewPoker() *Poker {
+	return &Poker{
 		RunInfo: entity.NewRunInfo(),
 	}
 }
 
-func (r *RogurLikePoker) Run() error {
-	fmt.Println("Welcome to Rogue-like Poker!")
+func (r *Poker) Run() error {
+	fmt.Println("Welcome to Poker!")
 	fmt.Println()
 
 	// fmt.Println("Choose next Blind")
