@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.4](https://github.com/litencatt/pkr/compare/v0.0.3...v0.0.4) - 2024-08-04
+- Rename to pkr by @litencatt in https://github.com/litencatt/pkr/pull/17
+
 ## [v0.0.3](https://github.com/litencatt/pkr/compare/v0.0.2...v0.0.3) - 2024-03-24
 
 - Implement ante1 rounds play by @litencatt in https://github.com/litencatt/pkr/pull/13
