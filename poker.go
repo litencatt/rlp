@@ -1,4 +1,4 @@
-package rlp
+package pkr
 
 import (
 	"fmt"
@@ -7,10 +7,10 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/litencatt/rlp/entity"
+	"github.com/litencatt/pkr/entity"
 )
 
-const Name string = "rlp"
+const Name string = "pkr"
 
 var Version = "dev"
 

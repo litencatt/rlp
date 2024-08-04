@@ -4,7 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/litencatt/rlp"
+	"github.com/litencatt/pkr"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,7 @@ var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run poker",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		poker := rlp.NewPoker()
+		poker := pkr.NewPoker()
 		if debugMode {
 			poker.DebugMode = true
 		}

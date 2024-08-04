@@ -1,4 +1,4 @@
-PKG = github.com/litencatt/rlp
+PKG = github.com/litencatt/pkr
 COMMIT = $$(git describe --tags --always)
 OSNAME=${shell uname -s}
 ifeq ($(OSNAME),Darwin)
@@ -10,7 +10,7 @@ endif
 export GO111MODULE=on
 
 BUILD_LDFLAGS = -X $(PKG).commit=$(COMMIT) -X $(PKG).date=$(DATE)
-RLP_BINARY ?= ./rlp
+RLP_BINARY ?= ./pkr
 
 deps:
 	go install github.com/spf13/cobra-cli@latest
@@ -18,7 +18,7 @@ deps:
 	go install github.com/Songmu/gocredits/cmd/gocredits@latest
 
 build:
-	go build -ldflags="$(BUILD_LDFLAGS)" -o $(RLP_BINARY) cmd/rlp/main.go
+	go build -ldflags="$(BUILD_LDFLAGS)" -o $(RLP_BINARY) cmd/pkr/main.go
 
 prerelease:
 	@$(MAKE) deps
