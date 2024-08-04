@@ -3,9 +3,9 @@ before:
     - go mod download
     - go mod tidy
 builds:
-  - id: rlp-darwin
+  - id: pkr-darwin
     ldflags:
-      - -s -w -X github.com/litencatt/rlp.Version={{.Version}} -X github.com/litencatt/rlp.commit={{.FullCommit}} -X github.com/litencatt/rlp.date={{.Date}} -X github.com/litencatt/rlp/version.Version={{.Version}}
+      - -s -w -X github.com/litencatt/pkr.Version={{.Version}} -X github.com/litencatt/pkr.commit={{.FullCommit}} -X github.com/litencatt/pkr.date={{.Date}} -X github.com/litencatt/pkr/version.Version={{.Version}}
     env:
       - CGO_ENABLED=1
     goos:
@@ -13,9 +13,9 @@ builds:
     goarch:
       - amd64
       - arm64
-    main: ./cmd/rlp/main.go
+    main: ./cmd/pkr/main.go
 archives:
-  - id: rlp-archive
+  - id: pkr-archive
     name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     format_overrides:
       - goos: darwin
@@ -35,13 +35,13 @@ changelog:
       - "^docs:"
       - "^test:"
 brews:
-  - name: rlp
+  - name: pkr
     tap:
       owner: litencatt
       name: homebrew-tap
     commit_author:
       name: litencatt
       email: litencatt@gmail.com
-    homepage: https://github.com/litencatt/rlp
-    description: rlp is Rogure-Like Poker CLI game.
+    homepage: https://github.com/litencatt/pkr
+    description: pkr is Rogure-Like Poker CLI game.
     license: MIT
