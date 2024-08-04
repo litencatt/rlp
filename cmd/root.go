@@ -35,7 +35,7 @@ var cfgFile string
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:     "rlp",
-	Short:   "Rogue-Like Poker CLI",
+	Short:   "Poker CLI",
 	Version: rlp.Version,
 }
 

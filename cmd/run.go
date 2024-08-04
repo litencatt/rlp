@@ -12,9 +12,9 @@ var debugMode bool
 
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "Run rogue-like poker",
+	Short: "Run poker",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		poker := rlp.NewRogurLikePoker()
+		poker := rlp.NewPoker()
 		if debugMode {
 			poker.DebugMode = true
 		}
